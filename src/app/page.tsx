@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { allProducts, vetements, accessoires, collections } from '@/data/products'
+import BaseballBat from '@/components/BaseballBat'
 
 // Featured products for hero section - Floraison collection
 const featuredCollection = allProducts.filter(p => p.collection === 'floraison')
@@ -15,48 +15,55 @@ export default function Home() {
         <>
             <Header />
 
-            {/* Hero - Large Image Section */}
-            <section className="relative h-screen min-h-[700px]">
-                <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-black">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-[25vw] font-bold text-white/5">L</span>
-                    </div>
+            {/* Hero - Large Section with 3D Model */}
+            <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
+                <div className="max-w-[1800px] mx-auto px-6 lg:px-10 w-full grid lg:grid-cols-2 gap-12 items-center pt-20">
+                    {/* Left: Hero Content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="z-10"
+                    >
+                        <p className="text-sm uppercase tracking-[0.3em] text-neutral-400 mb-6">
+                            Nouvelle Collection
+                        </p>
+                        <h1 className="text-6xl lg:text-[8rem] font-bold text-black leading-none mb-8 tracking-tighter">
+                            Flor<span className="italic">aison</span>
+                        </h1>
+                        <p className="text-xl text-neutral-600 mb-10 max-w-lg leading-relaxed">
+                            L'élégance brute rencontre l'instinct sauvage. Découvrez une collection qui redéfinit les codes du streetwear premium.
+                        </p>
+                        <div className="flex flex-wrap gap-6">
+                            <Link
+                                href="/vetements"
+                                className="px-10 py-5 bg-black text-white font-bold rounded-full hover:bg-neutral-800 transition-all hover:scale-105"
+                            >
+                                Explorer la collection
+                            </Link>
+                            <Link
+                                href="/a-propos"
+                                className="px-10 py-5 bg-transparent text-black font-bold rounded-full border-2 border-black hover:bg-black hover:text-white transition-all"
+                            >
+                                Notre histoire
+                            </Link>
+                        </div>
+                    </motion.div>
+
+                    {/* Right: 3D Model */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="relative h-[500px] lg:h-[700px] w-full"
+                    >
+                        <BaseballBat />
+                    </motion.div>
                 </div>
 
-                {/* Hero Content */}
-                <div className="absolute inset-0 flex items-end pb-20 lg:pb-32">
-                    <div className="max-w-[1800px] mx-auto px-6 lg:px-10 w-full">
-                        <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="max-w-2xl"
-                        >
-                            <p className="text-sm uppercase tracking-widest text-white/60 mb-4">
-                                Dernière collection
-                            </p>
-                            <h1 className="text-5xl lg:text-7xl font-bold text-white leading-none mb-6">
-                                Floraison
-                            </h1>
-                            <p className="text-lg text-white/70 mb-8 max-w-lg">
-                                La nature reprend ses droits. Découvrez notre dernière collection inspirée par l'éveil du printemps.
-                            </p>
-                            <div className="flex flex-wrap gap-4">
-                                <Link
-                                    href="/vetements"
-                                    className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-neutral-200 transition-colors"
-                                >
-                                    Découvrir
-                                </Link>
-                                <Link
-                                    href="/a-propos"
-                                    className="px-8 py-4 bg-transparent text-white font-medium rounded-full border border-white/30 hover:bg-white/10 transition-colors"
-                                >
-                                    Notre histoire
-                                </Link>
-                            </div>
-                        </motion.div>
-                    </div>
+                {/* Background Decoration */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none opacity-[0.03]">
+                    <span className="text-[40vw] font-black select-none">LÉSION</span>
                 </div>
             </section>
 
